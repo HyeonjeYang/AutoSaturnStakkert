@@ -89,3 +89,8 @@ AutoStakkert! 4
 ```
 
 AutoSaturnStakkert is a **preprocessing tool only**. Alignment, stacking, and sharpening are performed separately.
+
+
+<img width="839" height="562" alt="image" src="https://github.com/user-attachments/assets/11cd57e5-02e3-4631-b1bd-5bc7b0f05469" />
+
+[C0002_centered_AS4_lapl5_ap1.tif](https://github.com/user-attachments/files/31881264/C0002_centered_AS4_lapl5_ap1.tif)
