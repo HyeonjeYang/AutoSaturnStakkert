@@ -1,15 +1,18 @@
 # AutoSaturnStakkert
 
-A lightweight planetary video preprocessor for automatic tracking, centering, and AutoStakkert!-compatible RGB AVI generation.
+Lightweight planetary video preprocessing tools for automatic tracking, centering, and AutoStakkert!-ready output.
 
-It tracks a bright planetary target, keeps it centered, crops the video to a configurable ROI, and outputs an **uncompressed RGB24 AVI** for AutoStakkert! 4.
+- `autosaturnstakkert.py` → uncompressed **RGB24 AVI**
+- `cvsaturnstakkert.py` → **SER**
+
+Both scripts detect a bright planetary target, track it frame-by-frame, keep it centered, and crop it to a configurable ROI.
 
 ## Requirements
 
 - Python 3
-- FFmpeg
 - OpenCV
 - NumPy
+- FFmpeg *(AVI version only)*
 
 Install Python dependencies:
 
@@ -17,55 +20,48 @@ Install Python dependencies:
 py -m pip install opencv-python numpy
 ```
 
-FFmpeg must be installed and available in your system `PATH`.
+For `autosaturnstakkert.py`, FFmpeg must also be installed and available in your system `PATH`.
 
 ## Usage
 
+### AVI output
+
 ```bash
-py autosaturnstakkert.py "C:\path\to\your-video.mp4"
+py autosaturnstakkert.py "C:\path\to\video.mp4"
 ```
 
-The default output is:
+Output:
 
 ```text
-your-video_centered_AS4.avi
+video_centered_AS4.avi
 ```
 
-### Default parameters
+### SER output
 
-| Option | Default | Description |
-|---|---:|---|
-| `--roi` | `300x300` | Output crop size |
-| `--threshold` | `180` | Detection threshold |
-| `--max-jump` | `150` | Maximum movement between frames (px) |
-| `--search-margin` | `120` | Local search margin (px) |
-| `--max-failures` | `10` | Allowed consecutive tracking failures |
-| `--min-area` | `3` | Minimum detected object area |
+```bash
+py cvsaturnstakkert.py "C:\path\to\video.mp4"
+```
 
-## Examples
+Output:
 
-Larger square ROI:
+```text
+video_centered.ser
+```
+
+## Options
+
+Examples:
 
 ```bash
 py autosaturnstakkert.py "video.mp4" --roi 400
 ```
 
-Rectangular ROI:
-
 ```bash
-py autosaturnstakkert.py "video.mp4" --roi 500x350
+py autosaturnstakkert.py "video.mp4" --roi 500x350 --threshold 160
 ```
 
-Adjust detection and tracking:
-
 ```bash
-py autosaturnstakkert.py "video.mp4" --threshold 160 --max-jump 200
-```
-
-Combine options:
-
-```bash
-py autosaturnstakkert.py "video.mp4" --roi 400x300 --threshold 160 --max-jump 200
+py cvsaturnstakkert.py "video.mp4" --roi 400x300 --max-jump 200
 ```
 
 Show all options:
@@ -74,7 +70,11 @@ Show all options:
 py autosaturnstakkert.py --help
 ```
 
-## Output
+```bash
+py cvsaturnstakkert.py --help
+```
+
+## Workflow
 
 ```text
 Input video
@@ -83,12 +83,11 @@ Target detection & tracking
     ↓
 Centering + ROI crop
     ↓
-Uncompressed RGB24 AVI
+AVI or SER
     ↓
-AutoStakkert! 4
+AutoStakkert!
 ```
 
-AutoSaturnStakkert is a **preprocessing tool only**. Alignment, stacking, and sharpening are performed separately.
-
+These scripts are preprocessing tools only. Alignment, stacking, and sharpening are performed separately.
 
 <img width="839" height="562" alt="image" src="https://github.com/user-attachments/assets/11cd57e5-02e3-4631-b1bd-5bc7b0f05469" />
